@@ -1,0 +1,45 @@
+{% extends 'administrateur/admin.html.twig' %}
+
+{% block title %}RendezVous index{% endblock %}
+
+{% block body %}
+    <h1>RendezVous index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Heure</th>
+                <th>Patient</th>
+                <th>Etat</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for rendez_vou in rendez_vouses %}
+            <tr>
+                <td>{{ rendez_vou.id }}</td>
+                <td>{{ rendez_vou.date ? rendez_vou.date|date('Y-m-d') : '' }}</td>
+                <td>{{ rendez_vou.heure ? rendez_vou.heure|date('H:i:s') : '' }}</td>
+                <td>{{ rendez_vou.patient }}</td>
+                <td>{{ rendez_vou.medecin ? 'Deja pris en charge' : 'En attente' }}</td>
+
+                <td>
+                    {% if not rendez_vou.medecin %}
+                        <a class="btn btn-warning" href="{{ path('app_rendez_vous_valider', {'id': rendez_vou.id}) }}">valider</a>
+                    {% endif %}
+                    {# <a href="{{ path('app_rendez_vous_edit', {'id': rendez_vou.id}) }}">edit</a> #}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {# <a href="{{ path('app_rendez_vous_new') }}">Create new</a> #}
+{% endblock %}
+{% block home %}{% endblock %}

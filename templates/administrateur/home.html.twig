@@ -1,0 +1,12 @@
+{% extends 'administrateur/admin.html.twig' %}
+
+{% block title %}Edit Administrateur{% endblock %}
+
+{% block body %}
+    {% if is_granted('ROLE_ADMIN') %}
+        <h1>Bienvenue Major</h1>
+    {% else %}
+        <h1>Bienvenue Medecin</h1>
+    {% endif %}
+    
+{% endblock %}
